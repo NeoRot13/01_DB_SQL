@@ -1,6 +1,10 @@
 /* ------  Strukturen UNIQUE ----- */
 
-/* PRIMARY KEY + AUTO_INCREMENT */
+/*  
+    Tabelle mit id als PRIMARY KEY --> KEINE Duplikate moeglich
+    AUTO_INCREMENT ++
+    DEFAULT-Werte eintragen
+*/
 
 /* DB boo löschen, falls vorhanden*/
 DROP DATABASE IF EXISTS boo;
