@@ -1,43 +1,37 @@
 /* ------  Strukturen ----- */
 
 /* Datenbanken auf Server anzeigen */
-SHOW DATABASES;
+# SHOW DATABASES;
 
 /* DB boo löschen, falls vorhanden*/
-DROP DATABASE IF EXISTS boo;
+# DROP DATABASE IF EXISTS boo;
 
 /* DB boo anlegen, falls noch nicht vorhanden*/
-CREATE DATABASE IF NOT EXISTS boo;
+# CREATE DATABASE IF NOT EXISTS boo;
 
 /* DB auswählen */
-USE boo;
+# USE boo; --> oder boo.xx
 
 /* Tabelle anlegen, falls noch nicht vorhanden */
-CREATE TABLE IF NOT EXISTS test
+CREATE TABLE IF NOT EXISTS boo.test
 (
-    name VARCHAR(20),
-    age INT
+    name VARCHAR(20) NOT NULL DEFAULT "TBA",
+    age INT NOT NULL DEFAULT 0
 );
 
 /* Alle Tabellen in der DB anzeigen */
-SHOW TABLES;
+# SHOW TABLES;
 
 /* Struktur der Tabelle anzeigen */
-DESCRIBE test;
+DESCRIBE boo.test;
 
 /* ----- Daten ------- */
-INSERT INTO test(name,age) VALUES ("Grizabella", 29);
-INSERT INTO test(age,name) VALUES (35, "Alonzo");
-INSERT INTO test VALUES ();
+INSERT INTO boo.test(name,age) VALUES ("Grizabella",29);
+INSERT INTO boo.test(age,name) VALUES (35,"Alonzo");
+INSERT INTO boo.test VALUES ();
 
 /* Inhalte der Tabelle anzeigen */
-SELECT * FROM test;
-
-DROP TABLE IF EXISTS test;
-
-SHOW TABLES;
-
-
+SELECT * FROM boo.test;
 
 
 

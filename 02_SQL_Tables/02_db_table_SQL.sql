@@ -19,9 +19,6 @@ CREATE TABLE IF NOT EXISTS test
     age INT
 );
 
-/* Alle Tabellen in der DB anzeigen */
-SHOW TABLES;
-
 /* Struktur der Tabelle anzeigen */
 DESCRIBE test;
 
@@ -36,6 +33,7 @@ SELECT * FROM test;
 DROP TABLE IF EXISTS test;
 
 SHOW TABLES;
+
 
 
 
