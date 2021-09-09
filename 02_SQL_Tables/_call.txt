@@ -4,4 +4,6 @@ source 02_SQL_Tables/02_db_table_SQL.sql
 source 02_SQL_Tables/02a_db_table_SQL.sql
 source 02_SQL_Tables/02b_db_table_SQL.sql
 source 02_SQL_Tables/02c_db_table_SQL.sql
-source 02_SQL_Tables/03_db_table_SQL.sql
+
+source Challenges/Challenge_01.sql
+source Challenges/Challenge_01_update.sql
