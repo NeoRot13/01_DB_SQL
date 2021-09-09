@@ -5,7 +5,9 @@ source 02_SQL_Tables/02a_db_table_SQL.sql
 source 02_SQL_Tables/02b_db_table_SQL.sql
 source 02_SQL_Tables/02c_db_table_SQL.sql
 
+source 03_userDB/03_db_userDB_SQL.sql
+source 03_userDB/03a_db_userDB_SQL.sql
+source 03_userDB/03b_db_userDB_SQL.sql
+
 /* Challenge */
 source Challenges/Challenge_01.sql
-source Challenges/Challenge_01_update_pwd.sql
-source Challenges/Challenge_01_update_pwd_SHA1.sql
