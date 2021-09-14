@@ -1,117 +1,70 @@
-/* QUERIES Filtern mit WHERE */
+/* String-Funktionen */
+
 
 /*
-    Eingrenzen/Filtern WHERE & AND/OR etc.
-    Eingrenzen/Filtern WHERE & LIKE + Parameter
-    Eingrenzen/Filtern WHERE & RegEx
-    Eingrenzen/Filtern WHERE & IN / NOT IN
-    Eingrenzen/Filtern WHERE & BETWEEN / NOT BETWEEN
+    CONCAT() / Verknuepfung "string" + "string" ...
+    UPPER() --> alles in Großbuchstaben
+    LOWER() --> alles in Kleinbuchstaben
+    LENGTH() --> String-Laenge
+    REPLACE() --> Ersetzen von Stringanteilen
+    TRIM() --> Trimmen vor/nach String (Whitespace)
+    LINK: https://dev.mysql.com/doc/refman/5.6/en/string-functions.html
 */
 
--- Eingrenzen/Filtern WHERE & AND/OR etc.
-/*
-SELECT 
-    ticker AS "SYM",
-    c_name AS "Unternehmen",
-    price AS "Kurs ($)",
-    payouts AS "Z. p.a.",
-    dividend AS "Dividende",
-    CONCAT(sector," | ",industry) AS "Operations"
-FROM stocks.ccc
--- Einzeldatern / Strings
-# WHERE sector = "Communication Services" -- spez. Sektor
-# WHERE sector = "Media" -- spez. Branche
-# WHERE payouts = 12 -- Wer zahlt monatlich?
--- Kombination aus AND
-# WHERE sector = "Communication Servic" AND industry = "Entertainment"
-# WHERE sector = "Communication Servic" AND payouts = 12
--- Kombinationen durch AND / OR
-# HERE sector = "Communication Servic" AND (industry = "Entertainment" OR industry = "Media")
--- Kombinationen durch AND / NOT
-WHERE sector = "Communication Servic" AND NOT industry = "Media"
-ORDER BY industry DESC
-LIMIT 20 -- X Zeilen ab 0
-;
-*/
-
--- Eingrenzen/Filtern WHERE & LIKE + Parameter
-/*
--- Unscharfe Suche
-SELECT 
-    ticker AS "SYM",
-    c_name AS "Unternehmen",
-    industry AS "Branche"
-FROM stocks.ccc
-
--- scharfe Suche nach Strings
-# WHERE industry = "Media"
-
--- unschärfere Suche
--- Branchenname beginnt mit.. , dahinter beliebige Chars
-# WHERE industry LIKE "Air%"
--- Branchenname endet mit... , davor beliebige Chars
-# WHERE industry LIKE "%ment"
--- Branchenname enthaelt ...
-# WHERE industry LIKE "%ood%"
-
--- Branchenname endet/beginnt mit ... , danach/davor/inmitten ganau Char
-# WHERE industry LIKE "__dia"
-# WHERE industry LIKE "Med__"
-# WHERE industry LIKE "M___a"
-# WHERE industry LIKE "_ir%"
-# WHERE industry LIKE "_ood%"
-
-# WHERE industry LIKE "%ment"
-# WHERE industry LIKE "%ment" AND industry NOT LIKE "%ipment"
-WHERE industry LIKE "%ment" AND industry NOT LIKE "%ipment" AND industry NOT LIKE "%tain%"
-
-ORDER BY industry ASC
-LIMIT 40 -- X Zeilen ab 0
-;
-*/
-
--- Eingrenzen/ filtern whALTER & IN / NOT IN (Suchsets)
-/*
-SELECT 
-    ticker AS "SYM",
-    c_name AS "Unternehmen",
-    sector AS "Sektor",
-    industry AS "Branche"
-FROM stocks.ccc
-# WHERE sector = "Financials"
-# WHERE sector = "Financials" AND industry NOT IN ("Insurance","Banks")
-WHERE industry IN ("Beverages")
-
-ORDER BY industry ASC
-LIMIT 40 -- X Zeilen ab 0
-;
-*/
-
--- Eingrenzen/Friltern WHERE & RegEx
+-- CONCAT() / Verknuepfung "string" + "string" ....
 /*
 SELECT
-    c_name "Unternehmen"
+	ticker AS "SYM",
+    c_name "Unternehmen",
+    concat("Ops: ",sector," : ",industry) "Operation"
 FROM stocks.ccc
-# WHERE c_name RLIKE "^[AZ]"      -- mit A oder Z beginnend
-WHERE c_name RLIKE "^[1-9]"     -- mit Ziffer beginnend
-ORDER BY c_name;
+#ggf. Restriktionen
+LIMIT 10;
 */
 
--- Eingrenzen/Filtern WHERE & BETWEEN / NOT BETWEEN
-
-SELECT 
-    ticker AS "SYM",
-    c_name AS "Unternehmen",
-    price AS "Kurs ($)",
-    sector AS "Sektor",
-    industry AS "Branche"
+-- UPPER() --> alles in Großbuchstaben
+/*
+SELECT
+	ticker AS "SYM",
+    upper(c_name) "Unternehmen"
 FROM stocks.ccc
-# WHERE sector = "Financials" AND price < 30.0 -- =/>/<
-# WHERE sector = "Financials" AND (price BETWEEN 30.0 AND 50.0) -- =/>/<
-WHERE sector = "Financials" AND NOT (price BETWEEN 20.0 AND 250.0) -- Band rausfiltern
+#ggf. Restriktionen
+LIMIT 10;
+*/
 
-ORDER BY price DESC
-LIMIT 200 -- X Zeilen ab 0
-;
+-- LOWER() --> alles in Kleinbuchstaben (zb. bei mail-Adressen)
+/*
+SELECT
+	ticker AS "SYM",
+    lower(c_name) "Unternehmen"
+FROM stocks.ccc
+#ggf. Restriktionen
+LIMIT 10;
+*/
+
+-- LENGTH() --> char_length() --> String-Laenge
+/*
+SELECT
+	ticker SYM,
+    c_name Unternehmen,
+    concat("Ops: ",sector," : ",industry) Operation, 
+    length(concat("Ops: ",sector,":",industry)) StrLen -- in Byte
+    char_length(concat("Ops: ",sector,":",industry)) StrLen -- in Chars
+FROM stocks.ccc
+ORDER BY StrLen DESC
+LIMIT 20;
+*/
 
 
+-- REPLACE() --> Ersetzen von Stringanteilen
+/*SELECT
+	ticker AS "SYM",
+    #c_name "Unternehmen",
+    #replace(c_name,"Inc.","Incorporated") AS "Incorporated"
+    replace(c_name,"Corp.","Corporations") AS "Corporation"
+FROM stocks.ccc
+#WHERE c_name LIKE "%Inc."
+WHERE c_name LIKE "%Corp."
+LIMIT 20;*/
+
+-- TRIM() --> Trimmen vor/nach String (Whitespace) Siehe Link
